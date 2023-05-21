@@ -23,9 +23,9 @@ class Log(object):
         # 创建一个handler，用于写入日志文件
         self.log_time = time.strftime("%Y_%m_%d")
         # Windows下使用
-        file_dir = os.getcwd() + '\log'
+        # file_dir = os.getcwd() + '\log'
         # Linux 下使用
-        # file_dir = os.getcwd() + '/log'
+        file_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/log'
         # print(file_dir)
         if not os.path.exists(file_dir):
             os.mkdir(file_dir)
@@ -39,7 +39,7 @@ class Log(object):
         # 输出到日志文件
         # fh = logging.FileHandler(self.log_name, 'a')  # 追加模式  这个是python2的
         fh = logging.FileHandler(self.log_name, 'a', encoding='utf-8')  # 这个是python3的
-        fh.setLevel(logging.DEBUG)
+        fh.setLevel(logging.INFO)
 
         # 再创建一个handler，用于输出到控制台
         ch = logging.StreamHandler()
@@ -57,14 +57,14 @@ class Log(object):
         # 输入日志文件
         self.logger.addHandler(fh)
         # 输出到终端
-        self.logger.addHandler(ch)
+        # self.logger.addHandler(ch)
 
         #  添加下面一句，在记录日志之后移除句柄
-        self.logger.removeHandler(ch)
-        self.logger.removeHandler(fh)
+        # self.logger.removeHandler(ch)
+        # self.logger.removeHandler(fh)
         # 关闭打开的文件
         fh.close()
-        ch.close()
+        # ch.close()
 
     def getlog(self):
         return self.logger

@@ -20,8 +20,12 @@ def get_system_load():
     # 获取磁盘使用率
     disk = psutil.disk_usage('/')
     disk_used_percent = disk.percent
+    
+    # 获取CPU
+    cpu = psutil.cpu_percent(interval=1)
 
     result = {
+        'cpu': cpu,
         'load_1': load_1,
         'load_5': load_5,
         'load_15': load_15,
